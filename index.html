@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<title>Assignment Audio</title>
+<style type="text/css">
+  .musci{
+    margin: 10% 30%;
+    background: #c75606;
+    padding: 4%;
+    text-align: center;
+  }
+  a{
+    text-decoration: none;
+  }
+  button,a{
+    color: white;
+    background: skyblue;
+    border: none;
+    padding: 9px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px #747171;
+  }
+  .buttons{
+        margin-top: 10%;
+  }
+  a{
+    cursor: pointer;
+  }
+  #bm{
+    margin-bottom: 2%;
+  }
+</style>
+<body>
+  <section>
+    <div id="bm">
+      <h3>Book Mark</h3>
+      <div id="bm1"></div>
+    </div>
+    <hr>
+    <div class="musci">
+      <div class="audio">
+        <audio controls id="myAudio">
+        <source src="filename.mp3" type="audio/mpeg">
+          Your browser does not support the audio element.
+          </audio>        
+      </div>
+
+      <div class="buttons">
+        <button onclick="playAudio()" type="button">Play Audio</button>
+        <button onclick="pauseAudio()" type="button">Pause Audio</button>
+        <a href="filename.mp3" download="filename.mp3">Download Audio</a> 
+        <button id="bookmark" value="filename.mp3">Book Mark</button>
+      </div>
+    </div>
+  </section>
+  <script>
+    //For bookmark
+    document.getElementById('bookmark').addEventListener("click", bookmark);
+    if (localStorage.getItem("audio") !==null) {
+      var anchore = document.createElement("a");
+        var text = document.createTextNode("Horse Sound");   
+        anchore.appendChild(text);
+
+        var element = document.getElementById("bm1");
+        element.appendChild(anchore);
+    }
+    function bookmark() {
+      var audio = this.value;
+      if (localStorage.getItem("audio") == null) {
+        var anchore = document.createElement("a");
+        var text = document.createTextNode("Horse Sound");   
+        anchore.appendChild(text);
+
+        var element = document.getElementById("bm1");
+        element.appendChild(anchore);
+      }
+      localStorage.setItem("audio", audio);
+    }
+
+    document.getElementById('bm1').addEventListener("click", playAudio);
+    //!!For bookmark
+  
+
+    var x = document.getElementById("myAudio"); 
+    function playAudio() {
+      
+      if (localStorage.getItem("audio") !==null) {
+        document.getElementsByTagName('source')[0].src = localStorage.getItem("audio");
+      }
+
+      x.play(); 
+    } 
+
+    function pauseAudio() { 
+      x.pause(); 
+    } 
+</script>
+</body>
+</html>
